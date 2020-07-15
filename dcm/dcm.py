@@ -1,7 +1,7 @@
 import numpy as np
 import collections
 
-VERSION = "0.0.3"
+VERSION = "0.0.4"
 
 def F1(X, y):
     """
