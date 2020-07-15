@@ -1,4 +1,6 @@
 build/
+examples/datasets/
 data_complexity.egg-info/
 dist/
 */__pycache__/*
+!examples/datasets/.keep

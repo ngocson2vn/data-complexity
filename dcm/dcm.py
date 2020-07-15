@@ -1,5 +1,7 @@
 import numpy as np
 import collections
+import gower
+from dcm.fast_mst import MST
 
 VERSION = "0.0.4"
 
@@ -35,3 +37,24 @@ def F1(X, y):
             maxr = r
             index = i
     return index, 1 / (1 + maxr)
+
+
+def N1(X, y, cat_features=[]):
+    """
+    Calculate Fraction of Borderline Points (N1)
+      - X: ndarray features
+      - y: ndarray target
+      - cat_features: a boolean array that specifies categorical features
+    """
+
+    if len(cat_features) == 0:
+        cat_features = np.zeros(X.shape[-1], dtype=bool)
+    
+    # Calculate Gower distance matrix
+    distance_matrix = gower.gower_matrix(X, cat_features=cat_features)
+
+    # Generate a Minimum Spanning Tree
+    tree = MST(distance_matrix)
+    sub = tree[y[tree[:, 0]] != y[tree[:, 1]]]
+    vertices = np.unique(sub.flatten())
+    return len(vertices) / X.shape[0]

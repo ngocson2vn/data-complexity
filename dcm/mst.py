@@ -1,5 +1,16 @@
 import math
 import numpy as np
+from collections import defaultdict
+ 
+# Converts from adjacency matrix to adjacency list 
+def convert_matrix_to_list(a):
+    adjList = defaultdict(list)
+    for i in range(len(a)):
+        for j in range(len(a[i])):
+            if a[i][j] > 0:
+                adjList[i].append(j)
+    return adjList
+
 
 def MST(G):
     """
@@ -46,3 +57,23 @@ def MST(G):
         tree.append([x, y])
         n_edges += 1
     return np.array(tree)
+
+
+if __name__ == "__main__":
+    a = np.array(
+          [[0, 9, 75, 2, 0, 10],
+          [9, 0, 95, 19, 42, 99],
+          [75, 95, 0, 51, 66, 12],
+          [2, 19, 51, 0, 31, 22],
+          [0, 42, 66, 31, 0, 89],
+          [10, 99, 12, 22, 89, 0]]
+        )
+    adjList = convert_matrix_to_list(a)
+    print("Adjacency List:") 
+    for i in adjList: 
+        print(i, end ="") 
+        for j in adjList[i]: 
+            print(" -> {}".format(j), end ="") 
+        print()
+
+    print(MST(a))
