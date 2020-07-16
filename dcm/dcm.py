@@ -1,9 +1,8 @@
+import math
+import gower
 import numpy as np
 import collections
-import gower
 from dcm.fast_mst import MST
-
-VERSION = "0.0.6"
 
 def F1(X, y):
     """
@@ -11,7 +10,7 @@ def F1(X, y):
       - X: ndarray features
       - y: ndarray target
     """
-    maxr = -1
+    maxr = -math.inf
     index = -1
     X_classes = {}
     averages_classes = {}
@@ -21,8 +20,8 @@ def F1(X, y):
         X_classes[c] = X[y==c]
         averages_classes[c] = np.average(X_classes[c], axis=0)
     for i in range(X.shape[-1]):
-        numerator = 0
-        denominator = 0
+        numerator = 0.0
+        denominator = 0.0
         for c in counter.keys():
             X_c = X_classes[c]
             averages_c = averages_classes[c]
@@ -32,10 +31,11 @@ def F1(X, y):
             x = x - averages_c[i]
             x = x**2
             denominator += np.sum(x)
-        r = numerator/denominator
-        if r > maxr:
-            maxr = r
-            index = i
+        if denominator != 0:
+            r = numerator/denominator
+            if r > maxr:
+                maxr = r
+                index = i
     return index, 1 / (1 + maxr)
 
 

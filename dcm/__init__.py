@@ -1,3 +1,5 @@
+VERSION = "0.0.7"
+
 from dcm.mst import MST
 
 # Data Complexity Measures

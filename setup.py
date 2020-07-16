@@ -1,5 +1,5 @@
 import setuptools
-from dcm import dcm
+import dcm
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
