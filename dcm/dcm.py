@@ -27,6 +27,7 @@ def F1(X, y):
         X_classes[c] = X[y==c]
         averages_classes[c] = np.average(X_classes[c], axis=0)
     for i in range(X.shape[-1]):
+        r = 0
         numerator = 0.0
         denominator = 0.0
         for c in counter.keys():
@@ -40,11 +41,11 @@ def F1(X, y):
             denominator += np.sum(x)
         if denominator > 0:
             r = numerator/denominator
-            if DEBUG:
-                logger.debug("numerator = {}, denominator = {}, r = {}".format(numerator, denominator, r))
             if r > maxr:
                 maxr = r
                 index = i
+        if DEBUG:
+            logger.debug("{} => numerator = {}, denominator = {}, r = {}".format(i, numerator, denominator, r))
     return index, 1 / (1 + maxr)
 
 
