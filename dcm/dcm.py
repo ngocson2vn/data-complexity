@@ -1,8 +1,15 @@
+import os
 import math
 import gower
+import logging
 import numpy as np
 import collections
+
+import dcm.logger
 from dcm.fast_mst import MST
+
+logger = logging.getLogger('dcm')
+DEBUG = os.environ.get("DCM_DEBUG", 0)
 
 def F1(X, y):
     """
@@ -31,8 +38,10 @@ def F1(X, y):
             x = x - averages_c[i]
             x = x**2
             denominator += np.sum(x)
-        if denominator != 0:
+        if denominator > 0:
             r = numerator/denominator
+            if DEBUG:
+                logger.debug("numerator = {}, denominator = {}, r = {}".format(numerator, denominator, r))
             if r > maxr:
                 maxr = r
                 index = i
