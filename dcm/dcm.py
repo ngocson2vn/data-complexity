@@ -3,7 +3,7 @@ import collections
 import gower
 from dcm.fast_mst import MST
 
-VERSION = "0.0.5"
+VERSION = "0.0.6"
 
 def F1(X, y):
     """

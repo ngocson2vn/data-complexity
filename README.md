@@ -21,6 +21,18 @@ y = iris.target
 index, F1 = dcm.F1(X, y)
 ```
 
+### Fraction of Borderline Points (N1)
+```python
+from dcm import dcm
+from sklearn import datasets
+
+bc = datasets.load_breast_cancer(as_frame=True)
+X = bc.data.values
+y = bc.target.values
+
+N1 = dcm.N1(X, y)
+```
+
 ### Other Measures
 Coming soon...
 
