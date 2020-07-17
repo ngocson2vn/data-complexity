@@ -2,7 +2,7 @@ import pandas as pd
 from dcm import dcm
 import datasets
 
-dataset_file = 'datasets/creditcard.csv'
+dataset_file = 'examples/datasets/creditcard.csv'
 datasets.download_creditcard(dataset_file)
 
 print("Loading dataset ... ", end="", flush=True)

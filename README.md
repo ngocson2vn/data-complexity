@@ -33,6 +33,18 @@ y = bc.target.values
 N1 = dcm.N1(X, y)
 ```
 
+### Entropy of Class Proportions (C1) and Imbalance Ratio (C2)
+```python
+from dcm import dcm
+from sklearn import datasets
+
+bc = datasets.load_breast_cancer(as_frame=True)
+X = bc.data.values
+y = bc.target.values
+
+C1, C2 = dcm.C12(X, y)
+```
+
 ### Other Measures
 Coming soon...
 

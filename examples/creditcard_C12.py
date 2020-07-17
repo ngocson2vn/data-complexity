@@ -11,8 +11,8 @@ X = dataset.drop(columns=['Class']).values
 y = dataset['Class'].values
 print("DONE")
 
-print("Calculating F1 ... ", end="", flush=True)
-index, F1 = dcm.F1(X, y)
+print("Calculating C1 and C2 ... ", end="", flush=True)
+C1, C2 = dcm.C12(X, y)
 print("DONE")
-print("F1 = {}".format(F1))
-print("feature index = {}".format(index))
+print("C1 = {}".format(C1))
+print("C2 = {}".format(C2))

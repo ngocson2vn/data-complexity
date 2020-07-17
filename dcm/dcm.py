@@ -68,3 +68,23 @@ def N1(X, y, cat_features=[]):
     sub = tree[y[tree[:, 0]] != y[tree[:, 1]]]
     vertices = np.unique(sub.flatten())
     return len(vertices) / X.shape[0]
+
+
+def C12(X, y):
+    """
+    Calculate Entropy of Class Proportions (C1) and Imbalance Ratio (C2)
+      - X: ndarray features
+      - y: ndarray target
+    """
+    n = len(y)
+    counter = collections.Counter(y)
+    entroy = 0.0
+    tmp_sum = 0.0
+    for c in counter.keys():
+        pc = counter[c] / n
+        entroy += pc * math.log(pc)
+        tmp_sum += counter[c] / (n - counter[c])
+    C1 = 1 - (-entroy / math.log(len(counter)))
+    IR = ((len(counter) - 1) / len(counter)) * tmp_sum
+    C2 = 1 - (1 / IR)
+    return C1, C2
