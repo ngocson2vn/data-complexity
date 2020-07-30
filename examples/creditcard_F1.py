@@ -1,3 +1,4 @@
+import json
 import pandas as pd
 from dcm import dcm
 import datasets
@@ -12,7 +13,6 @@ y = dataset['Class'].values
 print("DONE")
 
 print("Calculating F1 ... ", end="", flush=True)
-index, F1 = dcm.F1(X, y)
+ratios, F1 = dcm.F1(X, y)
 print("DONE")
-print("F1 = {}".format(F1))
-print("feature index = {}".format(index))
+print("Discriminant Ratios = {}".format(json.dumps(ratios, indent=2)))

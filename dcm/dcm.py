@@ -18,7 +18,7 @@ def F1(X, y):
       - y: ndarray target
     """
     maxr = -math.inf
-    index = -1
+    d_ratios = {}
     X_classes = {}
     averages_classes = {}
     averages = np.average(X, axis=0)
@@ -41,12 +41,12 @@ def F1(X, y):
             denominator += np.sum(x)
         if denominator > 0:
             r = numerator/denominator
+            d_ratios[i] = r
             if r > maxr:
                 maxr = r
-                index = i
         if DEBUG:
             logger.debug("{} => numerator = {}, denominator = {}, r = {}".format(i, numerator, denominator, r))
-    return index, 1 / (1 + maxr)
+    return d_ratios, 1 / (1 + maxr)
 
 
 def N1(X, y, cat_features=[]):

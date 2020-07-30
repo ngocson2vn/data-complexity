@@ -14,12 +14,9 @@ def convert_matrix_to_list(matrix):
             if matrix[i][j] > 0:
                 newNode = [j, matrix[i][j]] 
                 adjList[i].append(newNode)
-
-                # newNode = [i, matrix[i][j]]
-                # adjList[j].append(newNode)
     return adjList
-  
-  
+
+
 class Heap(): 
     def __init__(self): 
         self.array = [] 
