@@ -5,10 +5,9 @@ import logging
 import numpy as np
 import collections
 
-import dcm.logger
+from dcm.logger import logger
 from dcm.fast_mst import MST
 
-logger = logging.getLogger('dcm')
 DEBUG = os.environ.get("DCM_DEBUG", 0)
 
 def F1(X, y):
@@ -27,7 +26,6 @@ def F1(X, y):
         X_classes[c] = X[y==c]
         averages_classes[c] = np.average(X_classes[c], axis=0)
     for i in range(X.shape[-1]):
-        r = 0
         numerator = 0.0
         denominator = 0.0
         for c in counter.keys():
@@ -39,11 +37,9 @@ def F1(X, y):
             x = x - averages_c[i]
             x = x**2
             denominator += np.sum(x)
-        if denominator > 0:
-            r = numerator/denominator
-            d_ratios[i] = r
-            if r > maxr:
-                maxr = r
+        r = (numerator / denominator) if denominator > 0 else 0
+        d_ratios[i] = r
+        maxr = r if r > maxr else maxr
         if DEBUG:
             logger.debug("{} => numerator = {}, denominator = {}, r = {}".format(i, numerator, denominator, r))
     return d_ratios, 1 / (1 + maxr)
