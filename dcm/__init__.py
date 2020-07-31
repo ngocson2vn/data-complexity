@@ -1,4 +1,7 @@
-VERSION = "0.1.2"
+VERSION = "0.1.3"
+
+import os
+__DEBUG__ = os.environ.get("DCM_DEBUG", 0)
 
 from dcm.mst import MST
 

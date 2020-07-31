@@ -5,10 +5,8 @@ import logging
 import numpy as np
 import collections
 
-from dcm.logger import logger
 from dcm.fast_mst import MST
-
-DEBUG = os.environ.get("DCM_DEBUG", 0)
+from dcm.log import getLogger
 
 def F1(X, y):
     """
@@ -16,6 +14,7 @@ def F1(X, y):
       - X: ndarray features
       - y: ndarray target
     """
+    logger = getLogger()
     maxr = -math.inf
     d_ratios = {}
     X_classes = {}
@@ -40,8 +39,7 @@ def F1(X, y):
         r = (numerator / denominator) if denominator > 0 else 0
         d_ratios[i] = r
         maxr = r if r > maxr else maxr
-        if DEBUG:
-            logger.debug("{} => numerator = {}, denominator = {}, r = {}".format(i, numerator, denominator, r))
+        logger.debug("{} => numerator = {}, denominator = {}, r = {}".format(i, numerator, denominator, r))
     return d_ratios, 1 / (1 + maxr)
 
 
